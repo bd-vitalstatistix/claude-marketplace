@@ -38,6 +38,29 @@ mcp__atlassian__createJiraIssue(
 - Multi-step work items that span sessions
 - Follow-up actions from meetings with named owners
 
+## Issue Triage Workflow
+
+When a bug, limitation, or operational concern is raised (typically via a Teams thread):
+
+1. **Identify the origin** — find the Teams message thread URL; add it as a comment on the JIRA ticket for traceability
+2. **Research and justify** — assess the upstream issue (e.g. LiteLLM GitHub issue), current codebase state (version pinned, config present/absent), and determine why it is relevant but not immediate
+3. **Raise a DS JIRA ticket** — document the problem, fix required, deployment strategy, and known operational impacts
+4. **Raise a repo-specific GitHub issue** — include concrete changes needed (diffs, YAML snippets), reference the JIRA ticket (`Tracks: DS-XXXX`), mirror key context so engineers can act without needing JIRA access
+5. **Cross-link** — add a comment on the JIRA ticket pointing to the GitHub issue URL
+
+### Priority justification pattern
+
+When the fix is known but deployment should be deferred, document explicitly:
+- Why it is not urgent (no current user impact, upstream fix not yet stable)
+- What the trigger condition is for actioning it (e.g. "upgrade to next stable release after X")
+- Any operational risks to validate before rollout
+
+## Standard Labels
+
+- `data-science`, `llm-gateway`, `superduck`, `infrastructure`
+- `policy`, `compliance`, `mcp`, `analytics`
+- `bug`, `enhancement`, `technical-debt`, `customer-request`
+
 ## Searching Issues
 
 ```python
