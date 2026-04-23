@@ -1,0 +1,51 @@
+project:
+  name: "claude-marketplace"
+
+application:
+  name: "Data Science"
+
+branch:
+  name: "${POLARIS_BRANCH_NAME:main}"
+  parent:
+    name: "${POLARIS_PARENT_BRANCH:main}"
+
+server:
+  url: "${POLARIS_SERVER_URL:https://polaris.blackduck.com}"
+
+assessment:
+  types: ["SAST", "SCA"]
+
+access:
+  token: "${POLARIS_ACCESS_TOKEN}"
+
+analysis:
+  mode: "cloud"
+
+capture:
+  fileSystem:
+    captureDirs:
+      - "plugins/"
+    excludePatterns:
+      - "**/.git/**"
+      - "**/__pycache__/**"
+      - "**/node_modules/**"
+      - "**/bridge-cli*/**"
+      - "**/polaris-output/**"
+      - "**/polaris-reports/**"
+
+reporting:
+  sarif:
+    create: true
+    file: "polaris-results.sarif"
+  pdf:
+    create: true
+    path: "./polaris-reports/"
+
+prComment:
+  enabled: true
+
+upload:
+  localConfig: true
+
+timeout:
+  analysis: 3600
