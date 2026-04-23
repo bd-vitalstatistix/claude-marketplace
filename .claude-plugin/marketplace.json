@@ -4,7 +4,7 @@
   "description": "Black Duck Data Science team plugins for LLM Gateway management, Atlassian workflows, data analytics, and content creation.",
   "owner": {
     "name": "Andrew Bolster",
-    "email": "andrew@bolster.online"
+    "email": "bolster@blackduck.com"
   },
   "plugins": [
     {
