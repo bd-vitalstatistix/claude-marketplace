@@ -1,6 +1,6 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
-  "name": "bolster-marketplace",
+  "name": "bd-vitalstatistix-marketplace",
   "description": "Black Duck Data Science team plugins for LLM Gateway management, Atlassian workflows, data analytics, and content creation.",
   "owner": {
     "name": "Andrew Bolster",
