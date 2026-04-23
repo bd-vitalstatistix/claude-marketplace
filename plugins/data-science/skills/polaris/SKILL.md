@@ -375,14 +375,17 @@ The Polaris Issue Management MCP server is hosted at `https://polaris.blackduck.
       "headers": {
         "Api-Token": "${POLARIS_ACCESS_TOKEN}"
       }
+    },
+    "service-mcp": {
+      "type": "http",
+      "url": "https://mcp.labs.blackduck.com/mcp/"
     }
   }
 }
 ```
 
-- Auth uses the same `POLARIS_ACCESS_TOKEN` as the scan. The header name is `Api-Token` (case-sensitive).
-- Token must be set in the shell environment before launching Claude Code — it is not read from `.env` automatically.
-- For EU/KSA instances, replace the URL with `https://eu.polaris.blackduck.com/api/mcp` or `https://ksa.polaris.blackduck.com/api/mcp`.
+- `polaris`: auth uses the same `POLARIS_ACCESS_TOKEN` as the scan. The header name is `Api-Token` (case-sensitive). Token must be set in the shell environment before launching Claude Code. For EU/KSA instances, replace the URL with `https://eu.polaris.blackduck.com/api/mcp` or `https://ksa.polaris.blackduck.com/api/mcp`.
+- `service-mcp`: Black Duck security data products — provides SQL access to findings, scans, customers, and vulnerability data. Complements the Polaris MCP's issue-level view with portfolio-wide analytics. URL shown is the labs instance; update to your environment's endpoint.
 
 The server is self-documenting — Claude Code will list available tools on connection.
 
