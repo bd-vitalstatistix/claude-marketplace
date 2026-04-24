@@ -13,45 +13,6 @@ Add Black Duck Polaris SAST and SCA security scanning to a repository. Covers Gi
 
 ---
 
-## MCP servers
-
-Two MCP servers work together to provide full Black Duck intelligence. **Add both** — superduck provides the portfolio-wide analytics foundation; polaris drills into issue-level detail within that context.
-
-### `.mcp.json` (repo root)
-
-```json
-{
-  "mcpServers": {
-    "superduck": {
-      "type": "http",
-      "url": "https://mcp.labs.blackduck.com/mcp/"
-    },
-    "polaris": {
-      "type": "http",
-      "url": "https://polaris.blackduck.com/api/mcp",
-      "headers": {
-        "Api-Token": "${POLARIS_ACCESS_TOKEN}"
-      }
-    }
-  }
-}
-```
-
-- `superduck`: Black Duck security data products — portfolio-wide analytics via SQL across findings, scans, customers, and vulnerability data, plus searchable public documentation for all Black Duck products. No auth required. URL shown is the labs instance; update to your environment's endpoint.
-- `polaris`: Issue-level detail for your specific project — queries issues, portfolio metrics, and entitlements scoped to the repos you have access to. Uses the same `POLARIS_ACCESS_TOKEN` as the scan; the header name is `Api-Token` (case-sensitive). Token must be set in the shell environment before launching Claude Code. For EU/KSA instances, replace the URL with `https://eu.polaris.blackduck.com/api/mcp` or `https://ksa.polaris.blackduck.com/api/mcp`.
-
-Both servers are self-documenting — Claude Code will list available tools on connection.
-
-### Connectivity check
-
-```bash
-# Quick connectivity check — should return tool list
-curl -s -H "Api-Token: $POLARIS_ACCESS_TOKEN" \
-  https://polaris.blackduck.com/api/mcp | head -20
-```
-
----
-
 ## One-time repo setup
 
 Must be done once per repository before the first scan runs:
@@ -353,7 +314,6 @@ scripts/requirements-*.txt
 
 ## Checklist for a new repo
 
-- [ ] Add `.mcp.json` to repo root — verify both MCP servers connect
 - [ ] Run repo setup commands (variable + secret) via `gh`
 - [ ] Create `polaris.yml` at repo root — update `project.name` and `captureDirs`
 - [ ] Create `.github/workflows/polaris-scan.yml` — update `POLARIS_PROJECT_NAME`
@@ -396,4 +356,4 @@ Note: The old `sig-repo.synopsys.com` domain is deprecated — use `repo.blackdu
 - **Polaris web UI**: https://polaris.blackduck.com → select portfolio "Data Science" → project
 - **GitHub Security tab**: repo → Security → Code scanning alerts (populated from SARIF upload)
 - **PR comments**: Polaris posts a findings summary comment on each PR automatically
-- **MCP servers**: see top of this document
+- **Polaris MCP**: connect via `https://polaris.blackduck.com/api/mcp` with `Api-Token: $POLARIS_ACCESS_TOKEN` — configured separately in `.mcp.json` outside this skill's scope
