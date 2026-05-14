@@ -4,3 +4,4 @@ polaris-reports/
 .polaris/
 polaris-output/
 bridge-cli*
+.claude/
